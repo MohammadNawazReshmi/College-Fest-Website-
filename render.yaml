@@ -1,0 +1,25 @@
+services:
+  # 1. Express Backend Web Service
+  - type: web
+    name: collage-fest-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    rootDir: server
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+
+  # 2. Vite React Frontend Static Site
+  - type: static
+    name: collage-fest-frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: collage-fest-backend
+          property: host
