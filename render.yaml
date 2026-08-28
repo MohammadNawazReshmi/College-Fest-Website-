@@ -15,6 +15,7 @@ services:
   # 2. Vite React Frontend Static Site
   - type: static
     name: collage-fest-frontend
+    runtime: static
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     envVars:
