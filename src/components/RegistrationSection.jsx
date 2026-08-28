@@ -84,9 +84,16 @@ export default function RegistrationSection({ initialSelectedEventId }) {
         }),
       });
 
-      const result = await response.json();
+      let result = {};
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        result = await response.json();
+      }
 
       if (!response.ok) {
+        if (response.status === 502 || response.status === 503 || response.status === 504) {
+          throw new Error('The server is booting up (Render Free Tier cold start). Please wait 30 seconds and try again!');
+        }
         throw new Error(result.message || 'Something went wrong. Please try again.');
       }
 
