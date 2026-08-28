@@ -3,6 +3,7 @@ services:
   - type: web
     name: collage-fest-backend
     runtime: node
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     rootDir: server
