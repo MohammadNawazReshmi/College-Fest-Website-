@@ -67,7 +67,7 @@ export default function RegistrationSection({ initialSelectedEventId }) {
       .map((e) => e.title);
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_URL = import.meta.env.VITE_API_BASE_URL || 'https://collage-fest-backend-ire7.onrender.com';
       const response = await fetch(`${API_URL}/api/register`, {
         method: 'POST',
         headers: {
